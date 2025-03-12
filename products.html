@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Products - Fireworks Store</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+    <div id="header"></div>
+
+    <main class="container">
+        <h2>Our Products</h2>
+        <div class="products">
+            <div class="product">
+                <img src="images/firework1.jpg" alt="Firework 1">
+                <h3>Big Explosion</h3>
+                <p>High-impact fireworks for large events.</p>
+                <p><strong>4999</strong></p>
+                <button onclick="addToCart(1, 'Big Explosion', 4999)">Add to Cart</button>
+            </div>
+            <div class="product">
+                <img src="images/firework2.jpg" alt="Firework 2">
+                <h3>Sky Burst</h3>
+                <p>Colorful bursts that light up the night sky.</p>
+                <p><strong>299</strong></p>
+                <button onclick="addToCart(2, 'Sky Burst', 299)">Add to Cart</button>
+            </div>
+            <!-- Add more products as needed -->
+        </div>
+    </main>
+
+    <div id="footer"></div>
+
+    <script>
+        // Load header and footer dynamically
+        document.getElementById("header").innerHTML = fetch('header.html').then(res => res.text()).then(html => document.getElementById("header").innerHTML = html);
+        document.getElementById("footer").innerHTML = fetch('footer.html').then(res => res.text()).then(html => document.getElementById("footer").innerHTML = html);
+    </script>
+</body>
+</html>

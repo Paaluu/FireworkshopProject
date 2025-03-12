@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact - Fireworks Store</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+    <div id="header"></div>
+
+    <main class="container">
+        <h3>Contact Information</h3>
+            <p>Email: info@fireworkshop.com</p>
+            <p>Phone: +46(0)769649541</p>
+            <p>Instagram: <a href="https://www.instagram.com/fyrverkeributiken.uppsala/">@fyrverkeributiken.uppsala</a></p>
+            <p>Facebook: <a href="https://www.facebook.com/profile.php?id=61572285916408&notif_id=1741197031816364&notif_t=page_user_activity&ref=notif#">Firework Store Uppsala</a></p>
+            <br>
+            <h3>Opening Hours: 26 - 31 December</h3>
+            <p>Monday - Sunday : 10 AM - 7 PM</p>
+        
+        <div class="google-maps">
+                <h2>Our Location</h2>
+                <p>Address: Almungevägen 13, 754 54, Uppsala, Sweden</p>
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2518.435456789!2d17.7000621!3d59.8454137!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x465fc9b50c1f224b%3A0xb45d8517e6421bf7!2sGnista%20Fyrverkerier%20Uppsala%20Fyrverkeri!5e0!3m2!1sen!2s!4v1610000000000!5m2!1sen!2s" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+        </div>  
+
+        <h3>Send us a Message</h3>
+        <form onsubmit="return validateForm(event, 'contact')">
+            <label for="name">Name:</label>
+            <input type="text" id="name" required>
+
+            <label for="email">Email:</label>
+            <input type="email" id="email" required>
+
+            <label for="phone">Phone:</label>
+            <input type="text" id="phone" required>
+            <br>
+            <label for="message">Message:</label>
+            <textarea id="message" rows="4" required></textarea>
+
+            <button type="submit">Send Message</button>
+        </form>
+
+
+    </main>
+
+    <div id="footer"></div>
+
+    <script>
+        // Load header and footer dynamically
+        document.getElementById("header").innerHTML = fetch('header.html').then(res => res.text()).then(html => document.getElementById("header").innerHTML = html);
+        document.getElementById("footer").innerHTML = fetch('footer.html').then(res => res.text()).then(html => document.getElementById("footer").innerHTML = html);
+    </script>
+</body>
+</html>

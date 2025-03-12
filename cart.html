@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopping Cart - Fireworks Store</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+    <div id="header"></div>
+
+    <main class="container">
+        <h2>Your Cart</h2>
+        <div id="cart-items"></div>
+        <p id="cart-total"><strong>Total: $0.00</strong></p>
+        <button onclick="clearCart()">Clear Cart</button>
+        <a href="checkout.html"><button>Proceed to Checkout</button></a>
+    </main>
+
+    <div id="footer"></div>
+
+    <script>
+        // Load header and footer dynamically
+        document.getElementById("header").innerHTML = fetch('header.html').then(res => res.text()).then(html => document.getElementById("header").innerHTML = html);
+        document.getElementById("footer").innerHTML = fetch('footer.html').then(res => res.text()).then(html => document.getElementById("footer").innerHTML = html);
+    </script>
+<script>
+    // Run displayCart() when the page loads
+    document.addEventListener("DOMContentLoaded", function () { displayCart(); });
+</script>
+<script src="js/scripts.js"></script>
+</body>
+</html>

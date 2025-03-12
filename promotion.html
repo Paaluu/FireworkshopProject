@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Promotions - Fireworks Store</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+    <div id="header"></div>
+
+    <main class="container">
+        <h2>Special Promotions</h2>
+        <p>Use promo code <strong>FIRE10</strong> for 10% off your order!</p>
+
+        <h3>Subscribe for Exclusive Deals</h3>
+        
+        <form onsubmit="return subscribe('email')">
+            <label for="email">Subscribe via Email:</label>
+            <input type="email" id="email" required>
+            <button type="submit">Subscribe</button>
+        </form>
+
+        <form onsubmit="return subscribe('phone')">
+            <label for="phone">Subscribe via SMS:</label>
+            <input type="text" id="phone" required>
+            <button type="submit">Subscribe</button>
+        </form>
+    </main>
+
+    <div id="footer"></div>
+
+    <script>
+        // Load header and footer dynamically
+        document.getElementById("header").innerHTML = fetch('header.html').then(res => res.text()).then(html => document.getElementById("header").innerHTML = html);
+        document.getElementById("footer").innerHTML = fetch('footer.html').then(res => res.text()).then(html => document.getElementById("footer").innerHTML = html);
+    </script>
+</body>
+</html>

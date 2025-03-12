@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout - Fireworks Store</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+    <div id="header"></div>
+
+    <main class="container">
+        <h2>Checkout</h2>
+
+        <h3>Your Order:</h3>
+        <div id="checkout-items"></div>
+        <p id="checkout-total"><strong>Total: $0.00</strong></p>
+
+        <h3>Delivery Information</h3>
+        <form onsubmit="return placeOrder(event)">
+            <label for="name">Full Name:</label>
+            <input type="text" id="name" required>
+
+            <label for="email">Email:</label>
+            <input type="email" id="email" required>
+
+            <label for="phone">Phone:</label>
+            <input type="text" id="phone" required>
+
+            <label for="address">Delivery Address:</label>
+            <input type="text" id="address" required>
+
+            <label for="delivery-date">Delivery Date:</label>
+            <input type="date" id="delivery-date" required>
+
+            <label for="delivery-time">Delivery Time:</label>
+            <input type="time" id="delivery-time" required>
+
+            <h3>Payment Method</h3>
+            <label>
+                <input type="radio" name="payment" value="prepay" required> Prepay Online
+            </label>
+            <label>
+                <input type="radio" name="payment" value="home" required> Pay on Delivery
+            </label>
+
+            <button type="submit">Place Order</button>
+        </form>
+    </main>
+
+    <div id="footer"></div>
+
+    <script>
+        // Load header and footer dynamically
+        document.getElementById("header").innerHTML = fetch('header.html').then(res => res.text()).then(html => document.getElementById("header").innerHTML = html);
+        document.getElementById("footer").innerHTML = fetch('footer.html').then(res => res.text()).then(html => document.getElementById("footer").innerHTML = html);
+    </script>
+    <script>
+        displayCheckout(); // Show order summary
+    </script>
+</body>
+</html>

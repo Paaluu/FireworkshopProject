@@ -1,12 +1,83 @@
 // server.js
 require('dotenv').config();
-const express = require('express');
-const cors = require('cors');
+const express = require("express");
+const sql = require("mssql");
+const cors = require("cors");
+
 const app = express();
 const port = 8080;
 
 app.use(cors());
 app.use(express.json());
+
+// 📌 **SQL Server-konfiguration** - Uppdatera dessa värden med din databasinfo
+const dbConfig = {
+    user: "din_användare",       // Ex: "sa"
+    password: "ditt_lösenord",   // Ditt SQL Server-lösenord
+    server: "localhost",         // localhost Eller servernamn/IP, ex: "(localdb)\\MSSQLLocalDB"
+    database: "fireworks_store",
+    options: {
+        encrypt: true,          // Sätt till true om du kör Azure SQL
+        trustServerCertificate: true
+    }
+};
+
+// 📌 **Anslut till databasen**
+async function connectDB() {
+    try {
+        await sql.connect(dbConfig);
+        console.log("✅ Ansluten till SQL Server!");
+    } catch (err) {
+        console.error("❌ Fel vid anslutning till databasen:", err);
+    }
+}
+connectDB();
+
+// 📌 **Lägg till en ny order**
+app.post("/orders", async (req, res) => {
+    const { name, email, phone, address, deliveryDate, deliveryTime, paymentMethod, cart } = req.body;
+
+    try {
+        const pool = await sql.connect(dbConfig);
+
+        // 📌 **1. Skapa en ny order**
+        const result = await pool.request()
+            .input("name", sql.NVarChar, name)
+            .input("email", sql.NVarChar, email)
+            .input("phone", sql.NVarChar, phone)
+            .input("address", sql.NVarChar, address)
+            .input("deliveryDate", sql.Date, deliveryDate)
+            .input("deliveryTime", sql.Time, deliveryTime)
+            .input("paymentMethod", sql.NVarChar, paymentMethod)
+            .query(`
+                INSERT INTO orders (name, email, phone, address, delivery_date, delivery_time, payment_method)
+                OUTPUT INSERTED.id
+                VALUES (@name, @email, @phone, @address, @deliveryDate, @deliveryTime, @paymentMethod)
+            `);
+
+        const orderId = result.recordset[0].id;
+
+        // 📌 **2. Lägg till orderrader**
+        for (let item of cart) {
+            await pool.request()
+                .input("orderId", sql.Int, orderId)
+                .input("productId", sql.Int, item.id)
+                .input("productName", sql.NVarChar, item.name)
+                .input("price", sql.Decimal(10, 2), item.price)
+                .input("quantity", sql.Int, item.quantity)
+                .query(`
+                    INSERT INTO order_items (order_id, product_id, product_name, price, quantity)
+                    VALUES (@orderId, @productId, @productName, @price, @quantity)
+                `);
+        }
+
+        res.status(201).json({ message: "Order placerad!", orderId });
+
+    } catch (err) {
+        console.error("❌ Fel vid orderplacering:", err);
+        res.status(500).json({ error: "Internt serverfel" });
+    }
+});
 
 // Använd inbyggd fetch om Node.js 18+ eller node-fetch som fallback
 const fetch = globalThis.fetch || require('node-fetch');

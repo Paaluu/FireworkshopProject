@@ -27,6 +27,44 @@ document.addEventListener("DOMContentLoaded", function () {
     //if (document.getElementById("checkout-items")) { displayCheckout();} // Ladda varukorgen på checkout.html
 });
 
+// Place Order with API request
+function placeOrder(event) {
+    event.preventDefault();
+    let name = document.getElementById("name").value.trim();
+    let email = document.getElementById("email").value.trim();
+    let phone = document.getElementById("phone").value.trim();
+    let address = document.getElementById("address").value.trim();
+    let deliveryDate = document.getElementById("delivery-date").value;
+    let deliveryTime = document.getElementById("delivery-time").value;
+    let paymentMethod = document.querySelector('input[name="payment"]:checked');
+    let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+    if (!name || !email || !phone || !address || !deliveryDate || !deliveryTime || !paymentMethod) {
+        alert("Please fill in all fields.");
+        return false;
+    }
+
+    let orderData = {
+        name, email, phone, address, deliveryDate, deliveryTime, paymentMethod: paymentMethod.value, cart
+    };
+
+    fetch("http://localhost:8080/orders", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(orderData)
+    })
+    .then(response => response.json())
+    .then(data => {
+        alert("Order placed successfully!");
+        localStorage.removeItem("cart"); // Clear cart after order
+        window.location.href = "index.html";
+    })
+    .catch(error => {
+        console.error("Error placing order:", error);
+        alert("Error placing order. Please try again.");
+    });
+}
+
 // Add to Cart Functionality
 function addToCart(productId, productName, productPrice) {
     let cart = JSON.parse(localStorage.getItem("cart")) || [];

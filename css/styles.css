@@ -109,3 +109,12 @@ footer a:hover {
         gap: 10px;
     }
 }
+
+#cart-icon {
+    font-weight: bold;
+    background-color: red;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 5px;
+}
+

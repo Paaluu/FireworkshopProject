@@ -12,11 +12,12 @@
 
     <main class="container">
         <h2>Checkout</h2>
-
         <h3>Your Order:</h3>
         <div id="checkout-items"></div>
         <p id="checkout-total"><strong>Total: $0.00</strong></p>
-
+        <a href="products.html"><button>Go back to Products</button></a>
+        <a href="cart.html"><button>Go back to Cart</button></a>
+        
         <h3>Delivery Information</h3>
         <form onsubmit="return placeOrder(event)">
             <label for="name">Full Name:</label>
@@ -53,11 +54,22 @@
 
     <script>
         // Load header and footer dynamically
-        document.getElementById("header").innerHTML = fetch('header.html').then(res => res.text()).then(html => document.getElementById("header").innerHTML = html);
-        document.getElementById("footer").innerHTML = fetch('footer.html').then(res => res.text()).then(html => document.getElementById("footer").innerHTML = html);
+        document.addEventListener("DOMContentLoaded", function () {
+            fetch("header.html")
+                .then(res => res.text())
+                .then(html => document.getElementById("header").innerHTML = html)
+                .catch(error => console.error("Error loading header:", error));
+    
+            fetch("footer.html")
+                .then(res => res.text())
+                .then(html => document.getElementById("footer").innerHTML = html)
+                .catch(error => console.error("Error loading footer:", error));
+    
+            // Run displayCheckout() when the page loads
+            displayCheckout()
+        });
     </script>
-    <script>
-        displayCheckout(); // Show order summary
-    </script>
+    <script src="js/scripts.js"></script>
+    
 </body>
 </html>

@@ -1,0 +1,50 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel</title>
+    <script defer src="admin.js"></script>
+    <link rel="stylesheet" href="css/styles.css">
+    <script src="/js/scripts.js" defer></script>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div id="header"></div>
+    <main>
+        <h1>Welcome to the Admin Panel</h1>
+        <p>Log in to access the admin dashboard</p>
+        <a href="index.html">Go to the Fireworks Store</a>
+    <div id="login-section">
+        <h2>Login</h2>
+        <input type="text" id="username" placeholder="Username">
+        <input type="password" id="password" placeholder="Password">
+        <button onclick="handleLogin()">Login</button>
+    </div>
+
+    <div id="admin-section" style="display: none;">
+        <button onclick="handleLogout()">Logout</button>
+        <h2>Admin Dashboard</h2>
+        <button onclick="fetchSalesReport()">Get Sales Report</button>
+        <pre id="sales-report"></pre>
+
+        <h3>Products</h3>
+        <ul id="product-list"></ul>
+
+        <h3>Add Product</h3>
+        <input type="text" id="product-name" placeholder="Name">
+        <input type="number" id="product-price" placeholder="Price">
+        <button onclick="addProduct()">Add</button>
+    </div>
+</main>
+<div id="footer"></div>
+
+<script>
+    // Load header and footer dynamically
+    document.getElementById("header").innerHTML = fetch('header.html').then(res => res.text()).then(html => document.getElementById("header").innerHTML = html);
+    document.getElementById("footer").innerHTML = fetch('footer.html').then(res => res.text()).then(html => document.getElementById("footer").innerHTML = html);
+</script>
+<script src="js/scripts.js"></script>
+</body>
+</html>

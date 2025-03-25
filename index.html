@@ -11,16 +11,16 @@
 </head>
 <body>
     <div id="header"></div>
-    <main>
+    <main class="container">
         <h1>Welcome to the Fireworks Store in Uppsala</h1>
         <p>Explore our wide range of fireworks and special promotions!</p>
     </main>
     <div id="footer"></div>
-
     <script>
         // Load header and footer dynamically
         document.getElementById("header").innerHTML = fetch('header.html').then(res => res.text()).then(html => document.getElementById("header").innerHTML = html);
         document.getElementById("footer").innerHTML = fetch('footer.html').then(res => res.text()).then(html => document.getElementById("footer").innerHTML = html);
     </script>
+    <script src="js/scripts.js"></script>
 </body>
 </html>

@@ -11,32 +11,79 @@
     <div id="header"></div>
 
     <main class="container">
+        <h2><a href="cart.html"><button>See your cart</button></a></h2>
+        <a href="checkout.html"><button>Proceed to Checkout</button></a>
         <h2>Our Products</h2>
         <div class="products">
             <div class="product">
-                <img src="images/firework1.jpg" alt="Firework 1">
-                <h3>Big Explosion</h3>
+                <img src="images/394-Hellfire41.webp" alt="Hellfire">
+                <h3>Hellfire</h3>
                 <p>High-impact fireworks for large events.</p>
-                <p><strong>4999</strong></p>
-                <button onclick="addToCart(1, 'Big Explosion', 4999)">Add to Cart</button>
+                <p><strong>4999 sek</strong></p>
+                <button onclick="addToCart(1, 'Hellfire', 4999)">Add to Cart</button>
             </div>
             <div class="product">
-                <img src="images/firework2.jpg" alt="Firework 2">
-                <h3>Sky Burst</h3>
+                <img src="images/352-Big-Thunder-1024x1024.png" alt="Big-Thunder">
+                <h3>Big-Thunder</h3>
                 <p>Colorful bursts that light up the night sky.</p>
-                <p><strong>299</strong></p>
-                <button onclick="addToCart(2, 'Sky Burst', 299)">Add to Cart</button>
+                <p><strong>299 sek</strong></p>
+                <button onclick="addToCart(2, 'Big-Thunder', 299)">Add to Cart</button>
+            </div>
+            <div class="product">
+                <img src="images/267-Great-Event-ny-1024x1024.png" alt="Great-Event">
+                <h3>Great-Event</h3>
+                <p>Colorful effect that ar more silent.</p>
+                <p><strong>299 sek</strong></p>
+                <button onclick="addToCart(3, 'Great-Event', 599)">Add to Cart</button>
+            </div>
+            <div class="product">
+                <img src="images/356-Crazy-Power-bred-1024x1024.png" alt="Crazy-Power">
+                <h3>Crazy-Power</h3>
+                <p>Colorful bursts that light up the night sky.</p>
+                <p><strong>399 sek</strong></p>
+                <button onclick="addToCart(4, 'Crazy-Power', 399)">Add to Cart</button>
+            </div>
+            <div class="product">
+                <img src="images/378-Happy-New-Year-L-500x500.png" alt="378-Happy-New-Year">
+                <h3>378-Happy-New-Year</h3>
+                <p>67 Colorful bursts with a great finale.</p>
+                <p><strong>799 sek</strong></p>
+                <button onclick="addToCart(5, '378-Happy-New-Year', 799)">Add to Cart</button>
+            </div>
+            <div class="product">
+                <img src="images/395-VANQUISH12.jpg" alt="395-VANQUISH">
+                <h3>395-VANQUISH</h3>
+                <p>Our most powerfull bursts that light up the night sky.</p>
+                <p><strong>4299 sek</strong></p>
+                <button onclick="addToCart(6, '395-VANQUISH', 4299)">Add to Cart</button>
             </div>
             <!-- Add more products as needed -->
         </div>
+        <h2><a href="cart.html"><button>See your cart</button></a></h2>
+        <a href="checkout.html"><button>Proceed to Checkout</button></a>
     </main>
 
     <div id="footer"></div>
 
     <script>
         // Load header and footer dynamically
-        document.getElementById("header").innerHTML = fetch('header.html').then(res => res.text()).then(html => document.getElementById("header").innerHTML = html);
-        document.getElementById("footer").innerHTML = fetch('footer.html').then(res => res.text()).then(html => document.getElementById("footer").innerHTML = html);
+        document.addEventListener("DOMContentLoaded", function () {
+            fetch("header.html")
+                .then(res => res.text())
+                .then(html => document.getElementById("header").innerHTML = html)
+                .catch(error => console.error("Error loading header:", error));
+    
+            fetch("footer.html")
+                .then(res => res.text())
+                .then(html => document.getElementById("footer").innerHTML = html)
+                .catch(error => console.error("Error loading footer:", error));
+    
+            // Run displayCart() when the page loads
+            // displayCart();
+        });
     </script>
+    <script src="js/scripts.js"></script>
+    
+    
 </body>
 </html>
